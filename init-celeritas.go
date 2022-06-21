@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/frangar97/celeritas"
+	"github.com/frangar97/myapp/handlers"
 )
 
 func initApplication() *application {
@@ -24,9 +25,13 @@ func initApplication() *application {
 
 	cel.AppName = "MyApp"
 
-	cel.InfoLog.Println("Debug esta seteado a", cel.Debug)
+	myHandlers := &handlers.Handlers{
+		App: cel,
+	}
 
-	app := &application{App: cel}
+	app := &application{App: cel, Handlers: myHandlers}
+
+	app.App.Routes = app.routes()
 
 	return app
 }

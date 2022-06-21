@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/frangar97/celeritas/render"
 	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
 )
@@ -22,6 +23,7 @@ type Celeritas struct {
 	InfoLog   *log.Logger
 	RoothPath string
 	Routes    *chi.Mux
+	Render    *render.Render
 	config    config
 }
 
@@ -69,6 +71,8 @@ func (c *Celeritas) New(rootPath string) error {
 		renderer: os.Getenv("RENDERER"),
 	}
 
+	c.Render = c.createRenderer(c)
+
 	return nil
 }
 
@@ -91,7 +95,7 @@ func (c *Celeritas) ListenAndServe() {
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%s", os.Getenv("PORT")),
 		ErrorLog:     c.ErrorLog,
-		Handler:      c.routes(),
+		Handler:      c.Routes,
 		IdleTimeout:  30 * time.Second,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 600 * time.Second,
@@ -120,4 +124,14 @@ func (c *Celeritas) startLoggers() (*log.Logger, *log.Logger) {
 	infoLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	return infoLog, errorLog
+}
+
+func (c *Celeritas) createRenderer(cel *Celeritas) *render.Render {
+	myRenderer := render.Render{
+		Renderer:  cel.config.renderer,
+		RoothPath: cel.RoothPath,
+		Port:      cel.config.port,
+	}
+
+	return &myRenderer
 }
