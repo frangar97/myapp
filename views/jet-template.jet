@@ -15,19 +15,13 @@ Welcome
             <img src="/public/images/celeritas.jpg" class="mb-5" style="width: 100px;height:auto;">
             <h1>Celeritas</h1>
             <hr>
-            <small class="text-muted">Go build something awesome</small>
+            <small class="text-muted">Esta pagina esta siendo renderizada por Jet</small>
         </div>
     </div>
 
     <hr>
 
-    <p>Cosas para probar:</p>
-
-    <div class="list-group">
-        <a href="/go-page" class="list-group-item list-group-item-action">Renderizar Go Template</a>
-        <a href="/jet-page" class="list-group-item list-group-item-action">Renderizar Jet Template</a>
-        <a href="/sessions" class="list-group-item list-group-item-action">Probar sesiones</a>
-    </div>
+    
 </div>
 
 {{end}}
