@@ -6,5 +6,6 @@ replace github.com/frangar97/celeritas => ../celeritas
 
 require (
 	github.com/frangar97/celeritas v0.0.0-20230315015009-2a1e0a84ddbe // indirect
+	github.com/go-chi/chi/v5 v5.0.10 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 )
