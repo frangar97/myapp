@@ -71,7 +71,7 @@ func (u *User) Get(id int) (*User, error) {
 	var theUser User
 	collection := upper.Collection(u.Table())
 
-	res := collection.Find(up.Cond{"user_id = ": id})
+	res := collection.Find(up.Cond{"id = ": id})
 	err := res.One(&theUser)
 
 	if err != nil {
@@ -80,7 +80,7 @@ func (u *User) Get(id int) (*User, error) {
 
 	var token Token
 	collection = upper.Collection(token.Table())
-	res = collection.Find(up.Cond{"user_id = ": theUser.ID, "expiry<": time.Now()}).OrderBy("created_at desc")
+	res = collection.Find(up.Cond{"user_id = ": theUser.ID, "expiry <": time.Now()}).OrderBy("created_at desc")
 	err = res.One(&token)
 
 	if err != nil {
