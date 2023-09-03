@@ -13,6 +13,7 @@ type User struct {
 	ID        int       `db:"id,omitempty"`
 	FirstName string    `db:"first_name"`
 	LastName  string    `db:"last_name"`
+	Active    int       `db:"user_active"`
 	Email     string    `db:"email"`
 	Password  string    `db:"password"`
 	CreatedAt time.Time `db:"created_at"`
@@ -134,7 +135,7 @@ func (u *User) Insert(theUser User) (int, error) {
 		return 0, err
 	}
 
-	id := getInserID(res.ID)
+	id := getInsertID(res.ID())
 	return id, nil
 }
 

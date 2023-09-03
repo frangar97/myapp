@@ -14,6 +14,8 @@ var db *sql.DB
 var upper db2.Session
 
 type Models struct {
+	Users  User
+	Tokens Token
 }
 
 func New(databasePool *sql.DB) Models {
@@ -25,10 +27,13 @@ func New(databasePool *sql.DB) Models {
 		upper, _ = postgresql.New(databasePool)
 	}
 
-	return Models{}
+	return Models{
+		Users:  User{},
+		Tokens: Token{},
+	}
 }
 
-func getInserID(i db2.ID) int {
+func getInsertID(i db2.ID) int {
 	idType := fmt.Sprintf("%T", i)
 
 	if idType == "int64" {
