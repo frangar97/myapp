@@ -23,6 +23,7 @@
 
     <div class="list-group">
         <a href="/sessions" class="list-group-item list-group-item-action">Try Sessions</a>
+        <a href="/users/login" class="list-group-item list-group-item-action">Login a user</a>
     </div>
 </div>
 
